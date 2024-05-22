@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SmokeTesting" thread-count="5" parallel="tests">
+	<test name="LoginTesting">
+		<classes>
+			<class name="com.sevenrmartsupermarket.tests.LoginTest">
+				<methods>
+					<!--Here it execute only needed testcase.so copy that testcase method name here..
+					Here exclude also there to exclude a testcase from that class-->
+					<include name="verifyUserLogin"></include>
+					<include name="verifyInvalidLoginErrorMsg"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="AdminUserCreationTesting">
+		<classes>
+			<class name="com.sevenrmartsupermarket.tests.AdminUsersTest">
+				<methods>
+					<!--Here it execute only needed testcase.so copy that testcase method name here..
+					Here exclude also there to exclude a testcase from that class-->
+					<include name="verifyNewlyAddedUserLogin"></include>
+					<include name="verifyDeactivationFunctionality"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
+
+<!--here we can see separate test output for each test tags in test-output-->
+<!--if any testcase fails, testng create a failes.xml file under testng-output..here we can run that to re-run the failed case-->
+<!--diff methods to run each sections to run parallely
+parallel="classes"
+parallel="methods"   here chances to hanging more-->
