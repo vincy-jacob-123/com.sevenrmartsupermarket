@@ -13,20 +13,20 @@ public class LoginTest extends Base {
 	LoginPage loginPage;
 	HomePage homePage;
 	
-	@Test
+	@Test(groups={"SmokeTesting", "parallelExecution"}, retryAnalyzer = com.sevenrmartsupermarket.listeners.RetryAnalyzer.class)
 	public void verifyUserLogin() {
 		//ScreenShotCapture screenShotCapture = new ScreenShotCapture();
 		loginPage = new LoginPage(driver);		
 		homePage = new HomePage(driver);
 		//screenShotCapture.takeScreenshot(driver, "loginPage");
-		String expectedProfileName = "Admin";
+		String expectedProfileName = "Admin1";
 		loginPage.login();
 		String actualProfileName = homePage.getProfileName();
 		Assert.assertEquals(actualProfileName, expectedProfileName);	
 		
 	}
 	
-	@Test
+	@Test(groups="SmokeTesting")
 	public void verifyInvalidLoginErrorMsg() { //doubt
 		loginPage = new LoginPage(driver);	
 		loginPage.login("user1", "invalidUser123");
@@ -35,5 +35,23 @@ public class LoginTest extends Base {
 		Assert.assertEquals(actualAlertMsg, expectedAlertmsg);
 		
 	}
+	
+//	@Test(dataProvider = "Newlogin",dataProviderClass = DataProviders.class)
+//
+//	public void verifyLoginDataProvider(String user,String password) {
+//
+//	loginPage=new LoginPage(driver);
+//
+//	homePage = new HomePage(driver);
+//
+//		loginPage.login(user,password);
+//		
+//		String actualProfileName = homePage.getProfilename();
+//
+//		String expectedProfileName = user;
+//
+//		Assert.assertEquals(actualProfileName, expectedProfileName);;
+//
+//	}
 
 }

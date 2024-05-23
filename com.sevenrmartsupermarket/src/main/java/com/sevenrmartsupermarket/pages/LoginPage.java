@@ -4,8 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.DataProvider;
 
 import com.sevenrmartsupermarket.constants.Constants;
+import com.sevenrmartsupermarket.utilities.ExcelReader;
 import com.sevenrmartsupermarket.utilities.WaitUtility;
 
 import java.io.FileInputStream;
@@ -16,6 +18,8 @@ public class LoginPage {
 	WebDriver driver;
 	
 	Properties properties = new Properties();
+	
+	ExcelReader excelReader = new ExcelReader();
 	
 	@FindBy (xpath = "//input[@name='username']")
 	private WebElement userNameField;	
@@ -110,6 +114,16 @@ public class LoginPage {
 	//mouse with send keys
 	//random name generate 
 	
-	
+	@DataProvider(name="Newlogin")       //using excel
+
+	public Object[][] Newlogin()  //dataprovide c lass
+
+	{
+
+		excelReader.setExcelFile("LoginData","DataProviderSheet");
+
+		return excelReader.getMultidimentionalData(3, 2);
+
+	}
 	 
 }

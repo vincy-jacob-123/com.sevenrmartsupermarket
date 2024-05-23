@@ -12,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import com.relevantcodes.extentreports.model.ITest;
 import com.sevenrmartsupermarket.constants.Constants;
@@ -57,14 +58,22 @@ public class Base {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
 	}
 	
-	@BeforeMethod
+	@BeforeMethod(enabled=true, alwaysRun = true)
 	public void launchBroswer() {
 		String browser=properties.getProperty("browser");
 		String url=properties.getProperty("url");
 		initialize(browser, url);
 	}
+//	@Parameters("browser")
+//	@BeforeMethod
+//	public void launchBrowser(String browser) {
+//
+//		String url = properties.getProperty("url");
+//		initialize(browser, url);
+//
+//	}
 	
-	@AfterMethod
+	@AfterMethod(enabled=true, alwaysRun = true)
 	public void terminateBroswer(ITestResult iTestResult) {
 		if (iTestResult.getStatus() == ITestResult.FAILURE) {
 			screenShotCapture.takeScreenshot(driver, iTestResult.getName());
