@@ -67,8 +67,7 @@ public class AdminUsersPage {
 		saveButton.click();
 	}
 	public String verifySuccessMsgAfterNewUserAddition(String type) {
-		//String color = pageUtility.getCssValue(userAdditionResultPopUp, type);
-		//System.out.println(color);
+		
 		return pageUtility.getCssValue(userAdditionResultPopUp, type);
 	}
 	
