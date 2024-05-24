@@ -43,7 +43,6 @@ public class AdminUsersPage {
 	}
 	
 	
-	
 	public void clickOnAdminUserBox() {
 		adminUsersBox.click();
 	}
