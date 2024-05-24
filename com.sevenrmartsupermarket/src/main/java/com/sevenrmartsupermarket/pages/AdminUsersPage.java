@@ -81,10 +81,6 @@ public class AdminUsersPage {
 		return verifySuccessMsgAfterNewUserAddition("background-color");
 	}
 	
-//	public String getNewUserNameFromTable() {
-//		checkUserLogo
-//	}
-//	
 	public void deactivateUser(String userName) {
 		List<String> namesList = new ArrayList();
 		namesList = generalUtility.getTextOfListelements(userNameColumnElements);
