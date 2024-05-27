@@ -1,39 +1,22 @@
-<suite name="CrossBrowserTest" Thread-count="5" parallel="tests">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="CrossBrowserTest" thread-count="5" parallel="tests">
 	<test name="RunInChrome">
-
 		<parameter name="browser" value="chrome"> </parameter>
-
 		<classes>
-
-			<class name="com.sevenrmartsupermarket.tests.HomeTest"></class>
-
+			<class name="com.sevenrmartsupermarket.tests.LoginTest"></class>
 		</classes>
-
 	</test>
-
 	<test name="RunInFirefox">
-
 		<parameter name="browser" value="firefox"> </parameter>
-
 		<classes>
-
-			<class name="com.sevenrmartsupermarket.tests.HomeTest"></class>
-
+			<class name="com.sevenrmartsupermarket.tests.LoginTest"></class>
 		</classes>
-
 	</test>
-
 	<test name="RunInEdge">
-
 		<parameter name="browser" value="edge"> </parameter>
-
 		<classes>
-
-			<class name="com.sevenrmartsupermarket.tests.HomeTest"></class>
-
+			<class name="com.sevenrmartsupermarket.tests.LoginTest"></class>
 		</classes>
-
 	</test>
-
 </suite>

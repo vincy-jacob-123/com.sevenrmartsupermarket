@@ -17,7 +17,7 @@ public class ExcelReader {
 	XSSFRow row;
 	XSSFCell cell;	
 	
-	public void setExcelFile(String workBookName, String sheetName) { //for intilializing excel sheet
+	public void setExcelFile(String workBookName, String sheetName) {
 		try {
 			String path = Constants.EXCEL_FILE_PATH + workBookName + ".xlsx";
 			File src = new File(path);
@@ -49,21 +49,12 @@ public class ExcelReader {
 	}	
 	
 	public Object[][] getMultidimentionalData(int row, int column) {
-
 		Object data[][] = new Object[row][column];
-
 		for (int i = 0; i < row; i++) {
-
 			for (int j = 0; j < column; j++) {
-
 				data[i][j] = getCellData(i, j);
-
 			}
-
 		}
-
 		return data;
-
 	}
-
 }

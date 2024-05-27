@@ -1,6 +1,5 @@
 package com.sevenrmartsupermarket.tests;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,36 +11,29 @@ public class HomeTest extends Base{
 	HomePage homePage ;
 	
 	@Test
-	public void verifyIsRemeberMeDisplayed() {
-		
+	public void verifyIsRemeberMeDisplayed() {		
 		homePage = new HomePage(driver);		
 		Assert.assertTrue(homePage.isRememberMeDisplayed());		
 	}
 	
 	@Test
-	public void verifyIsRemeberMeSelected() { //doubt
-		
+	public void verifyIsRemeberMeSelected() {		
 		homePage = new HomePage(driver);
 		homePage.clickOnRememberMe();
 		boolean isSelected = homePage.isRememberMeSelected();
-		System.out.println("isSelected0 " + isSelected);
+		System.out.println("isSelected:: " + isSelected);
 		Assert.assertTrue(isSelected);		
 	}
 	
 	@Test
-	public void verifyIsSignInDisplayed() {
-		
+	public void verifyIsSignInDisplayed() {		
 		homePage = new HomePage(driver);		
-		Assert.assertTrue(homePage.isSignInButtonDisplayed());
-	
-	}
-	
+		Assert.assertTrue(homePage.isSignInButtonDisplayed());	
+	}	
 	
 	@Test
-	public void clickOnSignInButon() {
-		
+	public void clickOnSignInButon() {		
 		homePage = new HomePage(driver);		
-		
 		homePage.clickOnSignInButton();
 	}
 }

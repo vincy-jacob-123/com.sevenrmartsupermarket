@@ -19,7 +19,7 @@ import com.sevenrmartsupermarket.constants.Constants;
 
 public class ExtentReporter implements IReporter{
 	private ExtentReports extent;
-
+	
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
 		extent = new ExtentReports(Constants.EXTENT_REPORT_PATH + File.separator + "Extent.html", true);
 
@@ -28,13 +28,11 @@ public class ExtentReporter implements IReporter{
 
 			for (ISuiteResult r : result.values()) {
 				ITestContext context = r.getTestContext();
-
 				buildTestNodes(context.getPassedTests(), LogStatus.PASS);
 				buildTestNodes(context.getFailedTests(), LogStatus.FAIL);
 				buildTestNodes(context.getSkippedTests(), LogStatus.SKIP);
 			}
 		}
-
 		extent.flush();
 		extent.close();
 	}
@@ -57,7 +55,6 @@ public class ExtentReporter implements IReporter{
 				} else {
 					test.log(status, "Test " + status.toString().toLowerCase() + "ed");
 				}
-
 				extent.endTest(test);
 			}
 		}

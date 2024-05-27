@@ -9,22 +9,19 @@ import com.sevenrmartsupermarket.utilities.PageUtility;
 public class HomePage {
 	
 	WebDriver driver;	
+	PageUtility pageUtility = new PageUtility(driver);
 	
 	@FindBy (xpath = "//a[@class='d-block']")
-	private WebElement userProfileElement; //encapsulation
-	
+	private WebElement userProfileElement; 	
 	@FindBy(xpath = "//label[@for='remember']")
-	private WebElement rememberMeText;
-	
+	private WebElement rememberMeText;	
 	@FindBy(xpath = "//button[text()='Sign In']")
 	private WebElement signInButton;
-	
+		
 	public HomePage(WebDriver driver) {		
 		this.driver = driver;
 		PageFactory.initElements(driver, this);		
 	}
-	
-	PageUtility pageUtility = new PageUtility(driver);
 	
 	public String getProfileName() {
 		return userProfileElement.getText();
@@ -44,9 +41,9 @@ public class HomePage {
 	
 	public boolean isSignInButtonDisplayed() {
 		return signInButton.isDisplayed(); 
-	}//isselected  --> only for input tag
+	}
 
 	public void clickOnSignInButton() {
-		 pageUtility.leftClickAction(signInButton, driver);//doubt
+		 pageUtility.leftClickAction(signInButton, driver);
 	}
 }

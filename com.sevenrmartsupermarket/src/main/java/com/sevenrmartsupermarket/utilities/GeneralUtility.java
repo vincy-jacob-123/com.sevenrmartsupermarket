@@ -7,8 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import com.github.javafaker.Faker;
 
-public class GeneralUtility {
-	
+public class GeneralUtility {	
 	
 	public List<String> getTextOfListelements(List<WebElement> elements) {
 		List<String> namesList = new ArrayList<String>();
@@ -27,19 +26,9 @@ public class GeneralUtility {
 	public static String getRandomFullName() {
 		Faker faker = new Faker();
 		return faker.name().fullName();
-//		String name = faker.name().fullName();
-//		String firstName = faker.name().firstName();
-//		String lastName = faker.name().lastName();
-//
-//		String streetAddress = faker.address().streetAddress();
 	}
 	
 	public boolean isTextConatins(WebElement element, String expectedText) {
 		return element.getText().contains(expectedText);
 	}
-
-	//git push
-	
-	
-
 }

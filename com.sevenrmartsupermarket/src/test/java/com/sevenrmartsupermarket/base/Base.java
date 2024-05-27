@@ -1,7 +1,6 @@
 package com.sevenrmartsupermarket.base;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.Properties;
 
@@ -14,7 +13,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
-import com.relevantcodes.extentreports.model.ITest;
 import com.sevenrmartsupermarket.constants.Constants;
 import com.sevenrmartsupermarket.utilities.ScreenShotCapture;
 
@@ -23,17 +21,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class Base {
 	
 	public WebDriver driver;
-	Properties properties = new Properties();;
-	
+	Properties properties = new Properties();	
 	ScreenShotCapture screenShotCapture = new ScreenShotCapture();
 	
 	/**Base Constructor**/
 	public Base() {
 		try {
-			//properties 
 			FileInputStream fs = new FileInputStream(Constants.CONFIG_FILE_PATH);
 			properties.load(fs);
-
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -41,7 +36,7 @@ public class Base {
 	
 	/**initializing browser**/
 	public void initialize(String browser, String url) {
-		if ( browser.equals("chrome") ) {
+		if (browser.equals("chrome") ) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 		} else if (browser.equals("edge")) {			
@@ -50,8 +45,7 @@ public class Base {
 		} else if (browser.equals("firfox")) {			
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
-		}
-		
+		}		
 		driver.get(url);
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -59,24 +53,23 @@ public class Base {
 	}
 	
 	@BeforeMethod(enabled=true, alwaysRun = true)
-	public void launchBroswer() {
+	public void launchBrowser() {
 		String browser=properties.getProperty("browser");
 		String url=properties.getProperty("url");
 		initialize(browser, url);
 	}
-//	@Parameters("browser")
-//	@BeforeMethod
-//	public void launchBrowser(String browser) {
-//
-//		String url = properties.getProperty("url");
-//		initialize(browser, url);
-//
-//	}
+	@Parameters("browser")
+	@BeforeMethod(enabled=false)
+	public void launchBrowser(String browser) {
+		String url = properties.getProperty("url");
+		initialize(browser, url);
+	}
 	
 	@AfterMethod(enabled=true, alwaysRun = true)
 	public void terminateBroswer(ITestResult iTestResult) {
 		if (iTestResult.getStatus() == ITestResult.FAILURE) {
 			screenShotCapture.takeScreenshot(driver, iTestResult.getName());
 		}
+		driver.close();
 	}
 }

@@ -1,6 +1,5 @@
 package com.sevenrmartsupermarket.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -18,49 +17,38 @@ public class AdminUsersTest extends Base {
 	SoftAssert softAssert = new SoftAssert();
 	
 	@Test
-	public void verifyNewAdminUserAddition() {
+	public void verifyNewUserCreation() {
 		loginPage = new LoginPage(driver);
 		adminUsersPage = new AdminUsersPage(driver);
 		loginPage.login();	
 		adminUsersPage.clickOnAdminUserBox();
 		excelReader.setExcelFile("NewUserLoginData", "LoginData");
 		String userName = excelReader.getCellData(4, 0) ;
-		userName = userName + GeneralUtility.getRandomFullName();//avoiding duplication
+		userName = userName + GeneralUtility.getRandomFullName();
 		String password = excelReader.getCellData(4, 1);
 		String userType = "admin";
 		String actualUserAdditonResultColour = adminUsersPage.addNewAdminUser(userName, password, userType);
-		//String actualUserAdditonResultColour = adminUsersPage.addNewAdminUser("aa44121", "aa", "admin");
-		//System.out.println(actualUserAdditonResultColour);
 		String expectedUserAdditonResultColour = "rgba(40, 167, 69, 1)";
-		softAssert.assertEquals(actualUserAdditonResultColour, expectedUserAdditonResultColour);
-		
-//		String actualNewUserName = adminUsersPage.getNewUserNameFromTable();
-//		String expectedNewUserName = userName;
-//		softAssert.assertEquals(actualNewUserName, expectedNewUserName);
-//		softAssert.assertAll();
+		softAssert.assertEquals(actualUserAdditonResultColour, expectedUserAdditonResultColour);		
 	}
 	
 	@Test
-	public void verifyNewlyAddedUserLogin() {
-		
+	public void verifyReLoginAfterNewUserCreation() {		
 		loginPage = new LoginPage(driver);
 		adminUsersPage = new AdminUsersPage(driver);
+		excelReader.setExcelFile("NewUserLoginData", "LoginData");
 		loginPage.login();	
 		adminUsersPage.clickOnAdminUserBox();
 		excelReader.setExcelFile("NewUserLoginData", "LoginData");
-		String userName = excelReader.getCellData(4, 0);
-		//String userName = "sfafafaqq1122";
-		String password = excelReader.getCellData(4, 1);
-		//String password = "aa";
+		String userName = excelReader.getCellData(1, 0);
+		String password = excelReader.getCellData(1, 1);
 		String userType = "admin";
-		//String actualUserAdditonResultColour = adminUsersPage.addNewAdminUser(userName, password, userType);
 		String actualUserAdditonResultColour = adminUsersPage.addNewAdminUser(userName, password, userType);
-		//System.out.println(actualUserAdditonResultColour);
 		String expectedUserAdditonResultColour = "rgba(40, 167, 69, 1)";
-		Assert.assertEquals(actualUserAdditonResultColour, expectedUserAdditonResultColour);
-		
-		//String actualNewUserLoginSucccess = loginPage.checkUserLogo(userName, password);	
-		Assert.assertTrue(loginPage.checkUserLogo("12", password));
+		softAssert.assertEquals(actualUserAdditonResultColour, expectedUserAdditonResultColour);
+	
+		softAssert.assertTrue(loginPage.checkReLogin(userName, password));
+		softAssert.assertAll();
 	}
 	
 	@Test
@@ -71,6 +59,4 @@ public class AdminUsersTest extends Base {
 		adminUsersPage.clickOnAdminUserBox();
 		adminUsersPage.deactivateUser("Nenita O'Keefe");
 	}
-	
-
 }

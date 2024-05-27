@@ -15,7 +15,8 @@ import com.sevenrmartsupermarket.utilities.PageUtility;
 public class AdminUsersPage {
 	
 	WebDriver driver;
-	
+	GeneralUtility generalUtility = new GeneralUtility();
+	PageUtility pageUtility = new PageUtility(driver);
 	
 	@FindBy(xpath = "(//a[@class='small-box-footer'])[2]")
 	WebElement adminUsersBox;
@@ -32,16 +33,12 @@ public class AdminUsersPage {
 	@FindBy(xpath = "//div[contains(@class,'alert alert')]")
 	WebElement userAdditionResultPopUp;	
 	@FindBy(xpath = "//tbody//tr//td[1]")
-	List<WebElement> userNameColumnElements;
-	
-	GeneralUtility generalUtility = new GeneralUtility();
-	PageUtility pageUtility = new PageUtility(driver);
+	List<WebElement> userNameColumnElements;	
 	
 	public AdminUsersPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-	}
-	
+	}	
 	
 	public void clickOnAdminUserBox() {
 		adminUsersBox.click();
@@ -65,8 +62,7 @@ public class AdminUsersPage {
 	public void clickOnSaveButton() {
 		saveButton.click();
 	}
-	public String verifySuccessMsgAfterNewUserAddition(String type) {
-		
+	public String verifySuccessMsgAfterNewUserAddition(String type) {		
 		return pageUtility.getCssValue(userAdditionResultPopUp, type);
 	}
 	
@@ -80,14 +76,7 @@ public class AdminUsersPage {
 	}
 	
 	public void deactivateUser(String userName) {
-		List<String> namesList = new ArrayList();
-		namesList = generalUtility.getTextOfListelements(userNameColumnElements);
-		
-		
-//		for (WebElement uerName : userNameColumnElements) {
-//			if
-//			System.out.println(uerName.getText());
-//		}
+		List<String> namesList = generalUtility.getTextOfListelements(userNameColumnElements);
 		int index = 0;
 		for (index = 0; index< namesList.size(); index++) {
 			if (namesList.get(index).equals(userName)) {
@@ -96,7 +85,6 @@ public class AdminUsersPage {
 			}
 		}
 		WebElement deactivateButton = driver.findElement(By.xpath("//table//tr[" + index + "]//td[5]//a[1]"));
-		pageUtility.scrollAndClick(deactivateButton);  //to scroll to end of the page..if name is at last 
-	}
-
+		pageUtility.scrollAndClick(deactivateButton);
+	}	
 }
